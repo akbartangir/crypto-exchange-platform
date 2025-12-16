@@ -65,3 +65,23 @@ This project is open-source and available for educational use. Any implementatio
     ```bash
     ./CryptoExchange
     ```
+
+## Testing
+This project uses **GoogleTest** for unit testing. Tests are automatically downloaded and built with the project.
+
+**Run tests:**
+```bash
+cd build
+./run_tests
+```
+
+**Or using CTest:**
+```bash
+cd build
+ctest --output-on-failure
+```
+
+**Current test coverage includes:**
+- OrderBookEntry type conversion and construction
+- Price comparison functions
+- Statistical calculations (mean, high, low prices)
