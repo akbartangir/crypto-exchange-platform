@@ -1,14 +1,14 @@
-# Minimum required CMake version
+# CMake version
 cmake_minimum_required(VERSION 3.10)
 
 # Project name and version
 project(CryptoExchange VERSION 1.0)
 
-# Set C++ standard
+# C++ standard
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-# Enable warnings for better code quality
+# Enable warnings
 if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU" OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
     add_compile_options(-Wall -Wextra -Wpedantic)
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
@@ -18,25 +18,41 @@ endif()
 # Include directories
 include_directories(include)
 
-# Add source files
+# Source files
 file(GLOB_RECURSE SOURCES "src/*.cpp")
 file(GLOB_RECURSE HEADERS "include/*.h")
 
-# Create the main executable
+# Main executable
 add_executable(CryptoExchange ${SOURCES} ${HEADERS})
 
-# Add tests
-# enable_testing()
+# Tests
+enable_testing()
 
-# Add testing executable
-# add_executable(run_tests tests/test_main.cpp)mkdir build && cd build
+# FetchContent for GoogleTest
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        v1.14.0
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
-# target_include_directories(run_tests PRIVATE include)
-# add_test(NAME AllTests COMMAND run_tests)
+# Testing executable
+file(GLOB_RECURSE TEST_SOURCES "tests/*.cpp")
+add_executable(run_tests ${TEST_SOURCES})
 
-# Optional: Link external libraries (if applicable)
-# target_link_libraries(CryptoTradingPlatform PRIVATE some_library)
+target_include_directories(run_tests PRIVATE include)
+target_link_libraries(run_tests PRIVATE GTest::gtest_main)
 
+# Source files needed for tests (exclude main.cpp)
+file(GLOB_RECURSE TEST_LIB_SOURCES "src/*.cpp")
+list(FILTER TEST_LIB_SOURCES EXCLUDE REGEX ".*main\\.cpp$")
+target_sources(run_tests PRIVATE ${TEST_LIB_SOURCES})
+
+include(GoogleTest)
+gtest_discover_tests(run_tests)
 
 # Print project configuration
 message(STATUS "Project Name: ${PROJECT_NAME}")
