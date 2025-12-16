@@ -3,7 +3,6 @@
 
 #include "OrderBookEntry.h"
 
-#include <string>
 #include <vector>
 
 class OrderBook {

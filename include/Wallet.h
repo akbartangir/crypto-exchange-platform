@@ -1,10 +1,9 @@
 #ifndef WALLET_H
 #define WALLET_H
 
-#include <map>
-#include <string>
-
 #include "OrderBookEntry.h"
+
+#include <map>
 
 class Wallet {
   private:

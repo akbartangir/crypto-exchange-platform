@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MAINAPP_H
+#define MAINAPP_H
 
 #include "OrderBook.h"
 #include "OrderBookEntry.h"
@@ -30,3 +31,5 @@ class MainApp {
 
     Wallet wallet;
 };
+
+#endif // MAINAPP_H
