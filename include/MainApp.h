@@ -1,17 +1,15 @@
 #pragma once
 
-#include "OrderBookEntry.h"
 #include "OrderBook.h"
+#include "OrderBookEntry.h"
 #include "Wallet.h"
 
-
-class MainApp
-{
-public:
+class MainApp {
+  public:
     MainApp();
     void init();
 
-private:
+  private:
     void displayMenu();
     void displayHelp();
     void displayExchangeStats();
@@ -31,5 +29,4 @@ private:
     // OrderBook orderBook{"../data/test.csv"};
 
     Wallet wallet;
-
 };

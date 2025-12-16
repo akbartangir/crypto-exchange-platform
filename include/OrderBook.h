@@ -6,17 +6,14 @@
 #include <string>
 #include <vector>
 
-
-class OrderBook
-{
-public:
+class OrderBook {
+  public:
     OrderBook(std::string file);
     ~OrderBook();
 
     std::vector<std::string> getKnownProducts();
-    std::vector<OrderBookEntry> getOrders(OrderBookType type,
-                                          std::string product,
-                                          std::string timestamp);
+    std::vector<OrderBookEntry>
+    getOrders(OrderBookType type, std::string product, std::string timestamp);
     std::string getEarliestTime();
     std::string getNextTime(std::string timestamp);
     static double getMeanPrice(const std::vector<OrderBookEntry>& orders);
@@ -24,11 +21,11 @@ public:
     static double getLowPrice(std::vector<OrderBookEntry>& orders);
 
     void insertOrder(OrderBookEntry& order);
-    std::vector<OrderBookEntry> matchAsksToBids(std::string product, std::string timestamp);
+    std::vector<OrderBookEntry> matchAsksToBids(std::string product,
+                                                std::string timestamp);
 
-private:
+  private:
     std::vector<OrderBookEntry> orders;
-
 };
 
 #endif // ORDERBOOK_H
