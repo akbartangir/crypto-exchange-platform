@@ -49,22 +49,17 @@ This project is open-source and available for educational use. Any implementatio
 ## Building and Running the Project
 *clone this repository and navigate to the project directory*
 
-1. Create a new directory for the project and navigate to it.
-   ```bash
-   mkdir build && cd build
-   ```
-2. Run CMake to configure the project.
-   ```bash
-    cmake ..
-    ```
-3. Build the project.
+1. Build the project
     ```bash
-    cmake --build .
+    cmake -S . -B build
+    cmake --build build -j
     ```
-4. Run the executable.
+
+2. Run the project.
     ```bash
-    ./CryptoExchange
+    ./build/CryptoExchange
     ```
+
 
 ## Testing
 This project uses **GoogleTest** for unit testing. Tests are automatically downloaded and built with the project.
